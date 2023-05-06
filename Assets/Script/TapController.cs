@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class TapController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Base b;
     void Start()
     {
-
+        b = FindAnyObjectByType<Base>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Tap();
+       Tap();
     }
 
 
@@ -25,12 +24,15 @@ public class TapController : MonoBehaviour
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, 100.0f))
+            if (Physics.Raycast(ray, out hit, 1f))
             {
                 if (hit.transform != null)
                 {
-                    if (hit.collider.tag == "Player")
-                        Debug.Log("sei gay");
+                    if (hit.collider.tag == "BaseTurret")
+                    {
+                        b.Spawn = true;
+                    }
+                       
                 }
             }
         }
