@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 5950116759373583470}
   - component: {fileID: 5199190698516729581}
   - component: {fileID: 6745123832691118449}
-  - component: {fileID: -7790186135085994219}
-  - component: {fileID: -6364671484195287132}
   - component: {fileID: -7309970009289388245}
   m_Layer: 0
   m_Name: 'TurretMitra '
@@ -120,32 +118,8 @@ MonoBehaviour:
   Ball: {fileID: 3792011776961003075, guid: d134cb4d84b82234ab67d24b267b3174, type: 3}
   IceBall: {fileID: 3792011776961003075, guid: 3e1ea0178f1f60644b5493ab51ead567, type: 3}
   Canna: {fileID: 8477381320884238629}
---- !u!135 &-7790186135085994219
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 264944352684925553}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &-6364671484195287132
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 264944352684925553}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  target: {fileID: 0}
+  range: 5
 --- !u!54 &-7309970009289388245
 Rigidbody:
   m_ObjectHideFlags: 0

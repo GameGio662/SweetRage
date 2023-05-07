@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TurretSpawn : MonoBehaviour
 {
-    [SerializeField] GameObject Turret1, Turret2, Turret3;
+    [SerializeField] public GameObject Turret1, Turret2, Turret3;
     GameObject turretType;
     int type;
 

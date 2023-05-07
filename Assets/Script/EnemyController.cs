@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    WaveManager WM;
 
     float speed, vita;
     Transform target;
@@ -12,18 +13,23 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        enemyType = Random.Range(0, 3);
+        WM = FindAnyObjectByType<WaveManager>();
 
+        enemyType = Random.Range(0, 3);
+        TypeEnemy(enemyType);
         target = WayPointManager.points[0];
     }
 
 
     private void Update()
     {
-
-        TypeEnemy(enemyType);
         MoveEnemy();
 
+        if(vita <= 0)
+        {
+            Destroy(gameObject);
+            WM.enemyCount++;
+        }
     }
 
     void MoveEnemy()
@@ -45,6 +51,7 @@ public class EnemyController : MonoBehaviour
         if (waypointIndex >= WayPointManager.points.Length - 1)
         {
             Destroy(gameObject);
+            WM.enemyCount++;
         }
     }
 
@@ -65,7 +72,7 @@ public class EnemyController : MonoBehaviour
     }
     void Normal(float _vita, float _speed)
     {
-        _vita = 4;
+        _vita = 8;
         _speed = 2f;
 
         speed = _speed;
@@ -76,7 +83,7 @@ public class EnemyController : MonoBehaviour
 
     void Veloce(float _vita, float _speed)
     {
-        _vita = 3;
+        _vita = 5;
         _speed = 3.5f;
 
         speed = _speed;
@@ -87,7 +94,7 @@ public class EnemyController : MonoBehaviour
 
     void Tank(float _vita, float _speed)
     {
-        _vita = 6;
+        _vita = 10;
         _speed = 1;
 
         speed = _speed;
@@ -95,6 +102,20 @@ public class EnemyController : MonoBehaviour
         gameObject.name = "Tank";
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Ball")
+        {
+            vita -= 1;
+            Destroy(other.gameObject);
+        }
 
+        if (other.gameObject.tag == "IceBall")
+        {
+            vita -= 2;
+            speed = 1;
+            Destroy(other.gameObject);
+        }
+    }
 
 }

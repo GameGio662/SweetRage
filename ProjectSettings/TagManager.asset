@@ -7,6 +7,8 @@ TagManager:
   - BaseTurret
   - Turret
   - Enemy
+  - Ball
+  - IceBall
   layers:
   - Default
   - TransparentFX

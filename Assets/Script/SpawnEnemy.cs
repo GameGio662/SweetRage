@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
-    [SerializeField] int maxCountEnemy;
+    [SerializeField] public int maxCountEnemy;
     [SerializeField] float timerSpawner;
     [HideInInspector] public bool stop;
+    public int RegisterMaxCount;
     float timer;
 
     [SerializeField] GameObject Enemy;
 
     void Start()
     {
+        RegisterMaxCount = maxCountEnemy;
         stop = true;
         timer = timerSpawner;
     }
