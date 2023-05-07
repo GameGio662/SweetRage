@@ -6,19 +6,21 @@ public class SpawnEnemy : MonoBehaviour
 {
     [SerializeField] int maxCountEnemy;
     [SerializeField] float timerSpawner;
+    [HideInInspector] public bool stop;
     float timer;
 
     [SerializeField] GameObject Enemy;
 
     void Start()
     {
+        stop = true;
         timer = timerSpawner;
     }
 
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer > timerSpawner && maxCountEnemy > 0)
+        if (timer > timerSpawner && maxCountEnemy > 0 && stop == false)
         {
             GameObject pos = Instantiate(Enemy);
             pos.transform.position = transform.position;

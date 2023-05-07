@@ -7,26 +7,27 @@ public class Base : MonoBehaviour
     [SerializeField] GameObject Turret;
     [SerializeField] GameObject SetTurret;
     [HideInInspector] public bool Spawn;
+    Collider col;
+
 
     void Start()
     {
-
+        col = GetComponent<Collider>();
     }
 
 
     void Update()
     {
-        Debug.Log(Spawn);
-        SpawnerTurret();
+        
     }
 
 
-    void SpawnerTurret()
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (Spawn == true)
+        if(other.gameObject.tag == "Turret")
         {
-            Instantiate(Turret, SetTurret.transform.position, Quaternion.identity);
+            col.enabled = false;
         }
     }
-
 }

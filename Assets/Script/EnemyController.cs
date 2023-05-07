@@ -1,22 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] float speed;
 
+    float speed, vita;
     Transform target;
-    int waypointIndex = 0;
+    int waypointIndex, enemyType;
 
     private void Start()
     {
+        enemyType = Random.Range(0, 3);
+
         target = WayPointManager.points[0];
     }
 
+
     private void Update()
     {
+
+        TypeEnemy(enemyType);
         MoveEnemy();
+
     }
 
     void MoveEnemy()
@@ -40,4 +47,54 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void TypeEnemy(int n)
+    {
+        switch (n)
+        {
+            case 0:
+                Normal(vita, speed);
+                break;
+            case 1:
+                Veloce(vita, speed);
+                break;
+            case 2:
+                Tank(vita, speed);
+                break;
+        }
+    }
+    void Normal(float _vita, float _speed)
+    {
+        _vita = 4;
+        _speed = 2f;
+
+        speed = _speed;
+        vita = _vita;
+        gameObject.name = "Normal";
+    }
+
+
+    void Veloce(float _vita, float _speed)
+    {
+        _vita = 3;
+        _speed = 3.5f;
+
+        speed = _speed;
+        vita = _vita;
+        gameObject.name = "Runner";
+    }
+
+
+    void Tank(float _vita, float _speed)
+    {
+        _vita = 6;
+        _speed = 1;
+
+        speed = _speed;
+        vita = _vita;
+        gameObject.name = "Tank";
+    }
+
+
+
 }
