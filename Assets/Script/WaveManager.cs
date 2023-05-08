@@ -9,12 +9,14 @@ public class WaveManager : MonoBehaviour
     [SerializeField] GameObject Tutorial, Space, Shop1, Shop2, Shop3;
 
     GameManager GM;
+    UIManager UM;
     SpawnEnemy SE;
 
     void Start()
     {
         GM = FindAnyObjectByType<GameManager>();
         SE = FindAnyObjectByType<SpawnEnemy>();
+        UM = FindAnyObjectByType<UIManager>();
         enemySpawCount = SE.maxCountEnemy;
 
         defCount = 3;
@@ -22,7 +24,6 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(countLevel);
         if (GM.gameStatus == GameManager.GameStatus.gameRunning)
         {
             StartFirsWave();
@@ -78,7 +79,8 @@ public class WaveManager : MonoBehaviour
     {
         if (countLevel == 3)
         {
-
+            GM.EndGame();
+            UM.End.SetActive(true);
         }
     }
 }

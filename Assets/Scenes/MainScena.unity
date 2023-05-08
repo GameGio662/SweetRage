@@ -10041,7 +10041,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1868911687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11135,8 +11135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76e27f4cd7213c94fac7703ed9ee07b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCountEnemy: 5
-  timerSpawner: 6
+  maxCountEnemy: 7
+  timerSpawner: 5
   stop: 0
   RegisterMaxCount: 0
   Enemy: {fileID: 8563979512768138019, guid: 604c42c713c0d794a8802de30fd6fb6e, type: 3}

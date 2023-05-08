@@ -83,8 +83,8 @@ public class EnemyController : MonoBehaviour
     }
     void Normal(float _vita, float _speed)
     {
-        _vita = 8;
-        _speed = 2f;
+        _vita = 10;
+        _speed = 2.5f;
 
         speed = _speed;
         vita = _vita;
@@ -105,8 +105,8 @@ public class EnemyController : MonoBehaviour
 
     void Tank(float _vita, float _speed)
     {
-        _vita = 10;
-        _speed = 2.5f;
+        _vita = 15;
+        _speed = 1.5f;
 
         speed = _speed;
         vita = _vita;
@@ -117,14 +117,14 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.tag == "Ball")
         {
-            vita -= 1;
+            vita -= 2;
             Destroy(other.gameObject);
         }
 
         if (other.gameObject.tag == "IceBall")
         {
-            vita -= 0.5f;
-            speed -= 0.3f;
+            vita -= 0.59f;
+            speed -= 0.39f;
             Destroy(other.gameObject);
         }
     }

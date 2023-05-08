@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject Start_;
     [SerializeField] public GameObject Pausa;
-    [SerializeField] GameObject End;
+    [SerializeField] public GameObject End;
 
 
     GameManager GM;
