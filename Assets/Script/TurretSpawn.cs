@@ -12,13 +12,15 @@ public class TurretSpawn : MonoBehaviour
 
     void Start()
     {
-        type = Random.Range(0, 3);
-        TurretType(type);
+        
+       
     }
 
 
     void Update()
     {
+        type = Random.Range(0, 3);
+        TurretType(type);
         SelectTurret();
     }
 
