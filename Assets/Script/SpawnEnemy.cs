@@ -5,21 +5,32 @@ using UnityEngine;
 public class SpawnEnemy : MonoBehaviour
 {
     [SerializeField] public int maxCountEnemy;
-    [SerializeField] float timerSpawner;
+    [SerializeField] public float timerSpawner;
     [HideInInspector] public bool stop;
-    public int RegisterMaxCount;
+    [HideInInspector] public int RegisterMaxCount;
     float timer;
 
     [SerializeField] GameObject Enemy;
 
+    GameManager GM;
+
     void Start()
     {
+        GM = FindAnyObjectByType<GameManager>();
+
+
         RegisterMaxCount = maxCountEnemy;
         stop = true;
         timer = timerSpawner;
     }
 
     void Update()
+    {
+        if (GM.gameStatus == GameManager.GameStatus.gameRunning)
+            Spawn();
+    }
+
+    void Spawn()
     {
         timer += Time.deltaTime;
         if (timer > timerSpawner && maxCountEnemy > 0 && stop == false)

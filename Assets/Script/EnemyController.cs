@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     WaveManager WM;
+    GameManager GM;
 
     float speed, vita;
     Transform target;
@@ -14,6 +15,7 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         WM = FindAnyObjectByType<WaveManager>();
+        GM = FindAnyObjectByType<GameManager>();
 
         enemyType = Random.Range(0, 3);
         TypeEnemy(enemyType);
@@ -23,13 +25,21 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        MoveEnemy();
-
-        if(vita <= 0)
+        if (GM.gameStatus == GameManager.GameStatus.gameRunning)
         {
-            Destroy(gameObject);
-            WM.enemyCount++;
+            MoveEnemy();
+
+            if (vita <= 0)
+            {
+                Destroy(gameObject);
+                WM.enemySpawCount--;
+            }
+
+            if (speed <= 1)
+                speed = 1;
+
         }
+
     }
 
     void MoveEnemy()
@@ -51,7 +61,8 @@ public class EnemyController : MonoBehaviour
         if (waypointIndex >= WayPointManager.points.Length - 1)
         {
             Destroy(gameObject);
-            WM.enemyCount++;
+            WM.enemySpawCount--;
+            WM.defCount--;
         }
     }
 
@@ -84,7 +95,7 @@ public class EnemyController : MonoBehaviour
     void Veloce(float _vita, float _speed)
     {
         _vita = 5;
-        _speed = 3.5f;
+        _speed = 4f;
 
         speed = _speed;
         vita = _vita;
@@ -95,7 +106,7 @@ public class EnemyController : MonoBehaviour
     void Tank(float _vita, float _speed)
     {
         _vita = 10;
-        _speed = 1;
+        _speed = 2.5f;
 
         speed = _speed;
         vita = _vita;
@@ -104,7 +115,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Ball")
+        if (other.gameObject.tag == "Ball")
         {
             vita -= 1;
             Destroy(other.gameObject);
@@ -112,8 +123,8 @@ public class EnemyController : MonoBehaviour
 
         if (other.gameObject.tag == "IceBall")
         {
-            vita -= 2;
-            speed = 1;
+            vita -= 0.5f;
+            speed -= 0.3f;
             Destroy(other.gameObject);
         }
     }

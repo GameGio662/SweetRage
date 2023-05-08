@@ -1,26 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WaveManager : MonoBehaviour
 {
-    public int enemyCount, enemySpawCount;
-    [SerializeField] GameObject Shop1, Shop2, Shop3;
+    [HideInInspector] public int enemyCount, enemySpawCount, defCount;
+    [SerializeField] GameObject Tutorial, Space, Shop1, Shop2, Shop3;
 
+    GameManager GM;
     SpawnEnemy SE;
-    TurretSpawn TS;
 
     void Start()
     {
+        GM = FindAnyObjectByType<GameManager>();
         SE = FindAnyObjectByType<SpawnEnemy>();
-        TS = FindAnyObjectByType<TurretSpawn>();
         enemySpawCount = SE.maxCountEnemy;
+
+        defCount = 3;
     }
 
     void Update()
     {
-        StartFirsWave();
-        NextWave();
+        Debug.Log(countLevel);
+        if (GM.gameStatus == GameManager.GameStatus.gameRunning)
+        {
+            StartFirsWave();
+            NextWave();
+            GameOver();
+            End();
+        }
+
     }
 
     public bool start;
@@ -30,22 +40,45 @@ public class WaveManager : MonoBehaviour
         {
             SE.stop = false;
             start = true;
+            Space.SetActive(false);
+            Tutorial.SetActive(false);
         }
     }
 
+    int countLevel;
     void NextWave()
     {
-        if(enemyCount == enemySpawCount)
+        if (enemySpawCount == 0)
         {
             start = false;
             SE.stop = true;
+            Space.SetActive(false);
             Shop1.SetActive(true);
             Shop2.SetActive(true);
             Shop3.SetActive(true);
-            SE.RegisterMaxCount++;
+            SE.RegisterMaxCount += 3;
+            SE.timerSpawner -= 1.5f;
             SE.maxCountEnemy = SE.RegisterMaxCount;
             enemySpawCount = SE.RegisterMaxCount;
-            enemyCount = 0;
+            defCount = 3;
+            countLevel++;
+        }
+    }
+
+    void GameOver()
+    {
+        if (defCount == 0)
+        {
+            SceneManager.LoadScene("Start", LoadSceneMode.Single);
+        }
+    }
+
+
+    void End()
+    {
+        if (countLevel == 3)
+        {
+
         }
     }
 }

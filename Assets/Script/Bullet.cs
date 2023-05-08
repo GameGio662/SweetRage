@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        if(target == null) 
+        if (target == null)
         {
             Destroy(gameObject);
             return;
@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
         float distance = 70 * Time.deltaTime;
 
 
-        if(dir.magnitude <= distance )
+        if (dir.magnitude <= distance)
         {
             return;
         }

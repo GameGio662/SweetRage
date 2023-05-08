@@ -18,16 +18,24 @@ public class Base : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
 
-
+    float up = 0.5f;
+    int setCount;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Turret")
+        if (other.gameObject.tag == "Turret" && setCount < 3)
         {
-            col.enabled = false;
+            other.transform.position = transform.position + Vector3.up * up;
+            up += 1f;
+            setCount++;
+
+            if(setCount == 3)
+            {
+                col.enabled = false;
+            }
         }
     }
 }
