@@ -28,6 +28,9 @@ public class SpawnEnemy : MonoBehaviour
     {
         if (GM.gameStatus == GameManager.GameStatus.gameRunning)
             Spawn();
+
+        if (timerSpawner <= 0)
+            timerSpawner = 0.2f;
     }
 
     void Spawn()

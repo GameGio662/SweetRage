@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Base : MonoBehaviour
@@ -9,15 +10,21 @@ public class Base : MonoBehaviour
     [HideInInspector] public bool Spawn;
     Collider col;
 
+    WaveManager WM;
+
 
     void Start()
     {
         col = GetComponent<Collider>();
+        WM = FindAnyObjectByType<WaveManager>();
+
+       
     }
 
 
     void Update()
     {
+        Debug.Log("set " + setCount);
 
     }
 
@@ -26,13 +33,13 @@ public class Base : MonoBehaviour
     int setCount;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Turret" && setCount < 3)
+        if (other.gameObject.tag == "Turret" && setCount < WM.maxCount)
         {
             other.transform.position = transform.position + Vector3.up * up;
             up += 1f;
             setCount++;
 
-            if(setCount == 3)
+            if (setCount == WM.maxCount)
             {
                 col.enabled = false;
             }

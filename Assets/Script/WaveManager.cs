@@ -5,21 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class WaveManager : MonoBehaviour
 {
-    [HideInInspector] public int enemyCount, enemySpawCount, defCount;
+    [HideInInspector] public int maxCount, enemyCount, enemySpawCount, defCount;
     [SerializeField] GameObject Tutorial, Space, Shop1, Shop2, Shop3;
+    [HideInInspector] public float speedUp, vitaUp;
 
     GameManager GM;
     UIManager UM;
     SpawnEnemy SE;
+    Base b;
+    UIManager UI;
 
     void Start()
     {
         GM = FindAnyObjectByType<GameManager>();
         SE = FindAnyObjectByType<SpawnEnemy>();
         UM = FindAnyObjectByType<UIManager>();
+        b = FindAnyObjectByType<Base>();
+        UI = FindAnyObjectByType<UIManager>();
         enemySpawCount = SE.maxCountEnemy;
 
+        if (UI.hardGame == false)
+            maxCount = 3;
+        win = 3;
         defCount = 3;
+
+        Time.timeScale = 1;
     }
 
     void Update()
@@ -27,6 +37,11 @@ public class WaveManager : MonoBehaviour
         if (GM.gameStatus == GameManager.GameStatus.gameRunning)
         {
             StartFirsWave();
+            Fast();
+
+            if (UI.hardGame == true)
+                HardGame();
+
             NextWave();
             GameOver();
             End();
@@ -46,6 +61,21 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    void Fast()
+    {
+        if (Input.GetKey(KeyCode.T))
+            Time.timeScale = 2;
+        else
+            Time.timeScale = 1;
+    }
+
+    int win;
+    void HardGame()
+    {
+        win = 4;
+        maxCount = 4;
+    }
+
     int countLevel;
     void NextWave()
     {
@@ -53,12 +83,14 @@ public class WaveManager : MonoBehaviour
         {
             start = false;
             SE.stop = true;
-            Space.SetActive(false);
+            Space.SetActive(true);
             Shop1.SetActive(true);
             Shop2.SetActive(true);
             Shop3.SetActive(true);
+            speedUp += 1f;
+            vitaUp += 1f;
             SE.RegisterMaxCount += 3;
-            SE.timerSpawner -= 1.5f;
+            SE.timerSpawner -= 1f;
             SE.maxCountEnemy = SE.RegisterMaxCount;
             enemySpawCount = SE.RegisterMaxCount;
             defCount = 3;
@@ -70,14 +102,14 @@ public class WaveManager : MonoBehaviour
     {
         if (defCount == 0)
         {
-            SceneManager.LoadScene("Start", LoadSceneMode.Single);
+            SceneManager.LoadScene("MainScena", LoadSceneMode.Single);
         }
     }
 
 
     void End()
     {
-        if (countLevel == 3)
+        if (countLevel == win)
         {
             GM.EndGame();
             UM.End.SetActive(true);

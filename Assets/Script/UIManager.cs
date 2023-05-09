@@ -36,10 +36,17 @@ public class UIManager : MonoBehaviour
     {
         Start_.SetActive(false);
         GM.gameStatus = GameManager.GameStatus.gameRunning;
-        SceneManager.LoadScene("MainScena", LoadSceneMode.Single);
     }
 
+    [HideInInspector] public bool hardGame;
+    public void Hard()
+    {
+        Start_.SetActive(false);
+        hardGame = true;
+        GM.gameStatus = GameManager.GameStatus.gameRunning;
+    }
 
+    
     public void Continue()
     {
         GM.gameStatus = GameManager.GameStatus.gameRunning;
@@ -49,7 +56,7 @@ public class UIManager : MonoBehaviour
     public void Restart()
     {
         GM.gameStatus = GameManager.GameStatus.gamePaused;
-        SceneManager.LoadScene("Start", LoadSceneMode.Single);
+        SceneManager.LoadScene("MainScena", LoadSceneMode.Single);
     }
 
 

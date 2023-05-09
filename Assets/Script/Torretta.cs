@@ -16,7 +16,7 @@ public class Torretta : MonoBehaviour
 
 
     public Transform target;
-    public float range = 5f;
+    public float range = 10f;
 
     GameManager GM;
 
@@ -81,14 +81,6 @@ public class Torretta : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "BaseTurret")
-        {
-            set = true;
-            Fermo = true;
-        }
-    }
 
     void Normal()
     {
@@ -122,6 +114,14 @@ public class Torretta : MonoBehaviour
                 bullet.Seek(target);
 
             timer = 0;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "BaseTurret")
+        {
+            set = true;
+            Fermo = true;
         }
     }
 

@@ -83,8 +83,8 @@ public class EnemyController : MonoBehaviour
     }
     void Normal(float _vita, float _speed)
     {
-        _vita = 10;
-        _speed = 2.5f;
+        _vita = 10 + WM.vitaUp;
+        _speed = 2.5f + WM.speedUp;
 
         speed = _speed;
         vita = _vita;
@@ -94,8 +94,8 @@ public class EnemyController : MonoBehaviour
 
     void Veloce(float _vita, float _speed)
     {
-        _vita = 5;
-        _speed = 4f;
+        _vita = 5 + WM.vitaUp;
+        _speed = 4f + WM.speedUp;
 
         speed = _speed;
         vita = _vita;
@@ -105,8 +105,8 @@ public class EnemyController : MonoBehaviour
 
     void Tank(float _vita, float _speed)
     {
-        _vita = 15;
-        _speed = 1.5f;
+        _vita = 15 + WM.vitaUp;
+        _speed = 1.5f + WM.speedUp;
 
         speed = _speed;
         vita = _vita;
